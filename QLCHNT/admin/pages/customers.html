@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Khách Hàng - TDUNG DECOR Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">🏠</span>
+        <h1 class="sidebar-title">TDUNG DECOR</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">MAIN NAVIGATION</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <span class="nav-icon">📦</span>
+                <span>Quản Lý Sản Phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link">
+                <span class="nav-icon">📂</span>
+                <span>Quản Lý Danh Mục</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">
+                <span class="nav-icon">🛒</span>
+                <span>Đơn Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link active">
+                <span class="nav-icon">👥</span>
+                <span>Khách Hàng</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">ANALYTICS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link">
+                <span class="nav-icon">�</span>
+                <span>Báo Cáo & Thống Kê</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">SETTINGS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../../index.html" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span>Về Trang Chủ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="logout-btn">
+                <span class="nav-icon">🚪</span>
+                <span>Đăng Xuất</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle">☰</button>
+          <h1 class="page-title" style="margin: 0; font-size: 24px;">Quản Lý Khách Hàng</h1>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleDropdown('notifications-dropdown')">
+            🔔
+            <span class="icon-badge" id="notification-badge" style="display: none;">0</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleDropdown('messages-dropdown')">
+            ✉️
+            <span class="icon-badge" id="message-badge" style="display: none;">0</span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-role">Quản trị viên</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Notifications Dropdown -->
+      <div class="header-dropdown" id="notifications-dropdown"></div>
+
+      <!-- Messages Dropdown -->
+      <div class="header-dropdown" id="messages-dropdown"></div>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Tổng Khách Hàng</div>
+              <div class="stat-value" id="total-customers">0</div>
+              <div class="stat-change positive">
+                ↑ 15.7% <span style="font-weight: 400; color: #64748b;">Tháng này</span>
+              </div>
+            </div>
+            <div class="stat-icon blue">👥</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Khách Mới (30 ngày)</div>
+              <div class="stat-value" id="new-customers">0</div>
+              <div class="stat-change positive">
+                ↑ 23.5% <span style="font-weight: 400; color: #64748b;">So với trước</span>
+              </div>
+            </div>
+            <div class="stat-icon green">🆕</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Có Đơn Hàng</div>
+              <div class="stat-value" id="active-customers">0</div>
+              <div class="stat-change" style="background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                Đang hoạt động
+              </div>
+            </div>
+            <div class="stat-icon yellow">✨</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Trung Bình Đơn Hàng</div>
+              <div class="stat-value" id="avg-orders">0</div>
+              <div class="stat-change" style="background: #dbeafe; color: #1e40af; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                Đơn/khách
+              </div>
+            </div>
+            <div class="stat-icon green">📊</div>
+          </div>
+        </div>
+
+        <!-- Filter & Actions -->
+        <div class="content-card">
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                <div class="header-search" style="margin: 0;">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" class="search-input" placeholder="Tìm kiếm khách hàng..." id="search-customers">
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-success" onclick="exportCustomersToExcel()" title="Xuất dữ liệu ra Excel">
+                  📥 Excel
+                </button>
+                <button class="btn btn-success" onclick="exportCustomersToPDF()" title="Xuất dữ liệu ra PDF">
+                  📄 PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              👥 Danh Sách Khách Hàng (<span id="customer-count">0</span>)
+            </h2>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>TÊN KHÁCH HÀNG</th>
+                  <th>EMAIL</th>
+                  <th>SỐ ĐIỆN THOẠI</th>
+                  <th>NGÀY ĐĂNG KÝ</th>
+                  <th>ĐƠN HÀNG</th>
+                  <th>TỔNG CHI TIÊU</th>
+                  <th>HÀNH ĐỘNG</th>
+                </tr>
+              </thead>
+              <tbody id="customers-table">
+                <!-- Will be filled by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Customer Detail Modal -->
+  <div class="modal-overlay" id="customer-detail-modal">
+    <div class="modal" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Chi Tiết Khách Hàng</h2>
+        <button class="modal-close" onclick="closeModal('customer-detail-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">👤 Thông Tin Cá Nhân</h3>
+            <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Tên:</strong> <span id="detail-name"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Email:</strong> <span id="detail-email"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>SĐT:</strong> <span id="detail-phone"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Ngày đăng ký:</strong> <span id="detail-created"></span></p>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">📊 Thống Kê Mua Hàng</h3>
+            <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Tổng đơn hàng:</strong> <span id="detail-total-orders"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Tổng chi tiêu:</strong> <span id="detail-total-spent"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Đơn trung bình:</strong> <span id="detail-avg-order"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Đơn gần nhất:</strong> <span id="detail-last-order"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">🛒 Lịch Sử Đơn Hàng</h3>
+        <div id="detail-order-history">
+          <!-- Will be filled by JavaScript -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('customer-detail-modal')">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../js/admin-main.js"></script>
+  <script src="../js/admin-notifications.js"></script>
+  <script src="../js/admin-customers.js"></script>
+</body>
+</html>

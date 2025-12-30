@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo & Thống Kê - TDUNG DECOR Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">🏠</span>
+        <h1 class="sidebar-title">TDUNG DECOR</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">MAIN NAVIGATION</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <span class="nav-icon">📦</span>
+                <span>Quản Lý Sản Phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link">
+                <span class="nav-icon">📂</span>
+                <span>Quản Lý Danh Mục</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">
+                <span class="nav-icon">🛒</span>
+                <span>Đơn Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span>Khách Hàng</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">ANALYTICS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link active">
+                <span class="nav-icon">�</span>
+                <span>Báo Cáo & Thống Kê</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">SETTINGS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../../index.html" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span>Về Trang Chủ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="logout-btn">
+                <span class="nav-icon">🚪</span>
+                <span>Đăng Xuất</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle">☰</button>
+          <h1 class="page-title" style="margin: 0; font-size: 24px;">Báo Cáo & Thống Kê</h1>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleDropdown('notifications-dropdown')">
+            🔔
+            <span class="icon-badge" id="notification-badge" style="display: none;">0</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleDropdown('messages-dropdown')">
+            ✉️
+            <span class="icon-badge" id="message-badge" style="display: none;">0</span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-role">Quản trị viên</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Notifications Dropdown -->
+      <div class="header-dropdown" id="notifications-dropdown"></div>
+
+      <!-- Messages Dropdown -->
+      <div class="header-dropdown" id="messages-dropdown"></div>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- Time Filter -->
+        <div class="content-card">
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <label style="font-weight: 600; color: #1e293b;">Thời gian:</label>
+                <select class="form-control" id="time-filter" style="width: auto;">
+                  <option value="7">7 ngày qua</option>
+                  <option value="30" selected>30 ngày qua</option>
+                  <option value="90">90 ngày qua</option>
+                  <option value="365">1 năm qua</option>
+                </select>
+                <button class="btn btn-primary btn-sm" onclick="refreshReports()">🔄 Làm mới</button>
+              </div>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-success" onclick="exportReportsToExcel()" title="Xuất báo cáo ra Excel">
+                  📥 Excel
+                </button>
+                <button class="btn btn-success" onclick="exportReportsToPDF()" title="Xuất báo cáo ra PDF">
+                  📄 PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue Overview -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">💰 Tổng Quan Doanh Thu</h2>
+          </div>
+          <div class="card-body">
+            <div class="stats-grid">
+              <div style="background: #f8fafc; padding: 20px; border-radius: 8px;">
+                <div style="font-size: 14px; color: #64748b; margin-bottom: 8px;">Tổng Doanh Thu</div>
+                <div style="font-size: 28px; font-weight: 700; color: #1e293b;" id="total-revenue">0 đ</div>
+                <div style="font-size: 12px; color: #10b981; margin-top: 8px;" id="revenue-change">↑ 0%</div>
+              </div>
+              <div style="background: #f8fafc; padding: 20px; border-radius: 8px;">
+                <div style="font-size: 14px; color: #64748b; margin-bottom: 8px;">Trung Bình/Đơn</div>
+                <div style="font-size: 28px; font-weight: 700; color: #1e293b;" id="avg-order-value">0 đ</div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Giá trị TB</div>
+              </div>
+              <div style="background: #f8fafc; padding: 20px; border-radius: 8px;">
+                <div style="font-size: 14px; color: #64748b; margin-bottom: 8px;">Tổng Đơn Hàng</div>
+                <div style="font-size: 28px; font-weight: 700; color: #1e293b;" id="total-orders-report">0</div>
+                <div style="font-size: 12px; color: #10b981; margin-top: 8px;" id="orders-change">↑ 0%</div>
+              </div>
+              <div style="background: #f8fafc; padding: 20px; border-radius: 8px;">
+                <div style="font-size: 14px; color: #64748b; margin-bottom: 8px;">Tỷ Lệ Hoàn Thành</div>
+                <div style="font-size: 28px; font-weight: 700; color: #1e293b;" id="completion-rate">0%</div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Đơn hoàn thành</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <!-- Revenue Chart -->
+          <div class="content-card">
+            <div class="card-header">
+              <h2 class="card-title">📊 Doanh Thu Theo Ngày</h2>
+            </div>
+            <div class="card-body">
+              <div id="revenue-chart" style="min-height: 300px;">
+                <!-- Simple bar chart will be drawn here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Orders Chart -->
+          <div class="content-card">
+            <div class="card-header">
+              <h2 class="card-title">📈 Đơn Hàng Theo Trạng Thái</h2>
+            </div>
+            <div class="card-body">
+              <div id="status-chart" style="min-height: 300px;">
+                <!-- Status distribution will be shown here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Products -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">🔥 Top 10 Sản Phẩm Bán Chạy</h2>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>XẾP HẠNG</th>
+                  <th>SẢN PHẨM</th>
+                  <th>DANH MỤC</th>
+                  <th>SỐ LƯỢNG BÁN</th>
+                  <th>DOANH THU</th>
+                  <th>TỶ LỆ</th>
+                </tr>
+              </thead>
+              <tbody id="top-products-table">
+                <!-- Will be filled by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Category Performance -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">📂 Hiệu Suất Theo Danh Mục</h2>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>DANH MỤC</th>
+                  <th>SỐ SẢN PHẨM</th>
+                  <th>ĐÃ BÁN</th>
+                  <th>DOANH THU</th>
+                  <th>TỶ LỆ</th>
+                </tr>
+              </thead>
+              <tbody id="category-performance-table">
+                <!-- Will be filled by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Brand Performance -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">🏷️ Hiệu Suất Theo Thương Hiệu</h2>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>THƯƠNG HIỆU</th>
+                  <th>SỐ SẢN PHẨM</th>
+                  <th>ĐÃ BÁN</th>
+                  <th>DOANH THU</th>
+                  <th>TỶ LỆ</th>
+                </tr>
+              </thead>
+              <tbody id="brand-performance-table">
+                <!-- Will be filled by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../js/admin-main.js"></script>
+  <script src="../js/admin-notifications.js"></script>
+  <script src="../js/admin-reports.js"></script>
+</body>
+</html>

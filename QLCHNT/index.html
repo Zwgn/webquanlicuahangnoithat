@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cửa hàng nội thất - Thiết kế đẹp, giá hợp lý">
+  <title>TDUNG DECOR - Cửa hàng nội thất</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Preconnect đến Google Fonts giảm thời gian chờ và load trang-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav class="site-nav">
+      <a href="index.html" class="logo">TDUNG DECOR</a>
+      
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Trang chủ</a>
+        
+        <!-- Dropdown Sản phẩm -->
+        <div class="nav-dropdown">
+          <a href="pages/products.html" class="dropdown-toggle">Sản phẩm ▾</a>
+          <div class="dropdown-content dropdown-mega">
+            <div class="dropdown-section">
+              <h4>📂 DANH MỤC</h4>
+              <div class="dropdown-items-wrapper">
+                <!-- Categories loaded from localStorage -->
+              </div>
+            </div>
+            <div class="dropdown-section">
+              <h4>🏢 THƯƠNG HIỆU</h4>
+              <div class="dropdown-items-wrapper">
+                <!-- Brands loaded from localStorage -->
+                <a href="pages/products.html?brand=moho">MOHO</a>
+                <a href="pages/products.html?brand=nhabep">Nhà Bếp Xinh</a>
+                <a href="pages/products.html?brand=noithatbinhminh">Nội Thất Bình Minh</a>
+                <a href="pages/products.html?brand=noithathoanmy">Nội Thất Hoàn Mỹ</a>
+                <a href="pages/products.html?brand=noithatfunika">Nội Thất Funika</a>
+                <a href="pages/products.html?brand=noithatphuhoa">Nội Thất Phú Hòa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <a href="pages/about.html">Giới thiệu</a>
+        <a href="pages/contact.html">Liên hệ</a>
+        <a href="pages/cart.html">
+          Giỏ hàng
+          <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+        </a>
+        <a href="pages/login.html">Đăng nhập</a>
+      </div>
+    </nav>
+  </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>CỬA HÀNG<br>NỘI THẤT</h1>
+        <p>Tận tâm mang đến cho bạn những giải pháp thiết kế nội thất đẳng cấp.</p>
+        <button class="hero-cta" onclick="window.location.href='pages/products.html'">Mua ngay</button>
+      </div>
+      <div class="hero-image">
+        <img src="images/slide.jpg" alt="Nội thất cao cấp" loading="eager">
+      </div>
+    </section>
+
+    <div class="container">
+      <section>
+        <h2>Sản phẩm nổi bật</h2>
+        <div id="featured-list" class="product-grid">
+          <div class="loading shimmer">Đang tải sản phẩm...</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Bán chạy nhất</h2>
+        <div id="bestseller-list" class="product-grid">
+          <div class="loading shimmer">Đang tải sản phẩm...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>THÔNG TIN LIÊN HỆ</h3>
+          <p><i class="icon-location"></i>📍N125.P.Phạm Xuân, TDP.Đọ,P.Thượng Hồng, Hưng Yên.</p>
+          <p><i class="icon-phone"></i> ☎️0867438232</p>
+          <p><i class="icon-email"></i> 📧dungb250905@gmail.com</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/UserDungBui" aria-label="Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="32" height="32"></a>
+            <a href="https://www.instagram.com/zwgn.b" aria-label="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="32" height="32"></a>
+            <a href="https://t.me/Dungbui2509" aria-label="Telegram"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" width="32" height="32"></a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+          <ul>
+            <li><a href="#">Hướng dẫn mua hàng</a></li>
+            <li><a href="#">Hướng dẫn thanh toán</a></li>
+            <li><a href="#">Chính sách bảo hành</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Tư vấn khách hàng</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>SƠ ĐỒ ĐƯỜNG ĐI</h3>
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2509.3553071780466!2d106.10570206455925!3d20.918034008150613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zcGjGsOG7nW5nIHRoxrDhu6NuZyBo4buTbmcgaMawbmcgecOqbg!5e1!3m2!1svi!2s!4v1761184906760!5m2!1svi!2s" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copyright">© 2025 TDUNG DECOR • Cửa hàng nội thất cao cấp</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

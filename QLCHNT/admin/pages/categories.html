@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Danh Mục - TDUNG DECOR Admin</title>
+  <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">🏠</span>
+        <h1 class="sidebar-title">TDUNG DECOR</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">MAIN NAVIGATION</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <span class="nav-icon">📦</span>
+                <span>Quản Lý Sản Phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link active">
+                <span class="nav-icon">📂</span>
+                <span>Quản Lý Danh Mục</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link">
+                <span class="nav-icon">🛒</span>
+                <span>Đơn Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span>Khách Hàng</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">ANALYTICS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>Báo Cáo & Thống Kê</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">SETTINGS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../../index.html" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span>Về Trang Chủ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="logout-btn">
+                <span class="nav-icon">🚪</span>
+                <span>Đăng Xuất</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle">☰</button>
+          <h1 class="page-title" style="margin: 0; font-size: 24px;">Quản Lý Danh Mục & Thương Hiệu</h1>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleDropdown('notifications-dropdown')">
+            🔔
+            <span class="icon-badge" id="notification-badge" style="display: none;">0</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleDropdown('messages-dropdown')">
+            ✉️
+            <span class="icon-badge" id="message-badge" style="display: none;">0</span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-role">Quản trị viên</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Notifications Dropdown -->
+      <div class="header-dropdown" id="notifications-dropdown"></div>
+
+      <!-- Messages Dropdown -->
+      <div class="header-dropdown" id="messages-dropdown"></div>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- Tabs -->
+        <div style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 2px solid #e2e8f0;">
+          <button class="tab-btn active" onclick="switchTab('categories')">
+            📂 Danh Mục Sản Phẩm
+          </button>
+          <button class="tab-btn" onclick="switchTab('brands')">
+            🏢 Thương Hiệu
+          </button>
+        </div>
+
+        <!-- Categories Section -->
+        <div id="categories-section">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">Danh Mục Sản Phẩm</h2>
+              <p style="font-size: 14px; color: #64748b;">Quản lý các loại sản phẩm trong cửa hàng</p>
+            </div>
+            <button class="btn btn-primary" onclick="openCategoryModal()">
+              ➕ Thêm Danh Mục
+            </button>
+          </div>
+
+          <div class="categories-grid" id="categories-list"></div>
+        </div>
+
+        <!-- Brands Section -->
+        <div id="brands-section" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">Thương Hiệu</h2>
+              <p style="font-size: 14px; color: #64748b;">Quản lý các thương hiệu nội thất</p>
+            </div>
+            <button class="btn btn-primary" onclick="openBrandModal()">
+              ➕ Thêm Thương Hiệu
+            </button>
+          </div>
+
+          <div class="categories-grid" id="brands-list"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Category Modal -->
+  <div class="modal-overlay" id="category-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="category-modal-title">Thêm Danh Mục Mới</h2>
+        <button class="modal-close" onclick="closeCategoryModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="category-id">
+        <div class="form-group">
+          <label for="category-name-input">Tên danh mục *</label>
+          <input type="text" id="category-name-input" class="form-control" placeholder="VD: Sofa, Bàn, Ghế...">
+        </div>
+        <div class="form-group">
+          <label for="category-slug-input">ID (slug) *</label>
+          <input type="text" id="category-slug-input" class="form-control" placeholder="VD: sofa, table, chair...">
+          <small style="color: #64748b;">Chỉ dùng chữ thường, không dấu, không khoảng trắng</small>
+        </div>
+        <div class="form-group">
+          <label for="category-desc-input">Mô tả</label>
+          <textarea id="category-desc-input" class="form-control" rows="3" placeholder="Mô tả ngắn về danh mục..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category-icon-input">Icon (emoji)</label>
+          <input type="text" id="category-icon-input" class="form-control" placeholder="🛋️">
+        </div>
+        <div class="form-group">
+          <label for="category-color-input">Màu nền (gradient)</label>
+          <input type="text" id="category-color-input" class="form-control" placeholder="#667eea, #764ba2">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeCategoryModal()">Hủy</button>
+        <button class="btn btn-primary" onclick="saveCategory()">💾 Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Modal -->
+  <div class="modal-overlay" id="brand-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="brand-modal-title">Thêm Thương Hiệu Mới</h2>
+        <button class="modal-close" onclick="closeBrandModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="brand-id">
+        <div class="form-group">
+          <label for="brand-name-input">Tên thương hiệu *</label>
+          <input type="text" id="brand-name-input" class="form-control" placeholder="VD: IKEA, MOHO...">
+        </div>
+        <div class="form-group">
+          <label for="brand-slug-input">ID (slug) *</label>
+          <input type="text" id="brand-slug-input" class="form-control" placeholder="VD: ikea, moho...">
+          <small style="color: #64748b;">Chỉ dùng chữ thường, không dấu, không khoảng trắng</small>
+        </div>
+        <div class="form-group">
+          <label for="brand-desc-input">Mô tả</label>
+          <textarea id="brand-desc-input" class="form-control" rows="3" placeholder="Mô tả về thương hiệu..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Loại thương hiệu</label>
+          <div style="display: flex; gap: 16px;">
+            <label style="display: flex; align-items: center; gap: 8px;">
+              <input type="radio" name="brand-type" value="international" checked>
+              <span>Quốc tế</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px;">
+              <input type="radio" name="brand-type" value="domestic">
+              <span>Trong nước</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeBrandModal()">Hủy</button>
+        <button class="btn btn-primary" onclick="saveBrand()">💾 Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/data.js"></script>
+  <script src="../js/admin-main.js"></script>
+  <script src="../js/admin-notifications.js"></script>
+  <script src="../js/admin-categories.js"></script>
+</body>
+</html>

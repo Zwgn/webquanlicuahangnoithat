@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Đơn Hàng - TDUNG DECOR Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">🏠</span>
+        <h1 class="sidebar-title">TDUNG DECOR</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">MAIN NAVIGATION</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="products.html" class="nav-link">
+                <span class="nav-icon">📦</span>
+                <span>Quản Lý Sản Phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="categories.html" class="nav-link">
+                <span class="nav-icon">📂</span>
+                <span>Quản Lý Danh Mục</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.html" class="nav-link active">
+                <span class="nav-icon">🛒</span>
+                <span>Đơn Hàng</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="customers.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span>Khách Hàng</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">ANALYTICS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link">
+                <span class="nav-icon">�</span>
+                <span>Báo Cáo & Thống Kê</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">SETTINGS</div>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../../index.html" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span>Về Trang Chủ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="logout-btn">
+                <span class="nav-icon">🚪</span>
+                <span>Đăng Xuất</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle">☰</button>
+          <h1 class="page-title" style="margin: 0; font-size: 24px;">Quản Lý Đơn Hàng</h1>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleDropdown('notifications-dropdown')">
+            🔔
+            <span class="icon-badge" id="notification-badge" style="display: none;">0</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleDropdown('messages-dropdown')">
+            ✉️
+            <span class="icon-badge" id="message-badge" style="display: none;">0</span>
+          </button>
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-role">Quản trị viên</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Notifications Dropdown -->
+      <div class="header-dropdown" id="notifications-dropdown"></div>
+
+      <!-- Messages Dropdown -->
+      <div class="header-dropdown" id="messages-dropdown"></div>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Tổng Đơn Hàng</div>
+              <div class="stat-value" id="total-orders-count">0</div>
+              <div class="stat-change positive">
+                ↑ 12.5% <span style="font-weight: 400; color: #64748b;">Tháng này</span>
+              </div>
+            </div>
+            <div class="stat-icon blue">🛒</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Đang Xử Lý</div>
+              <div class="stat-value" id="pending-orders">0</div>
+              <div class="stat-change" style="background: #dbeafe; color: #1e40af; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                Cần xử lý
+              </div>
+            </div>
+            <div class="stat-icon yellow">⏳</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Đang Giao</div>
+              <div class="stat-value" id="shipping-orders">0</div>
+              <div class="stat-change" style="background: #dbeafe; color: #1e40af; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                Đang vận chuyển
+              </div>
+            </div>
+            <div class="stat-icon green">🚚</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Hoàn Thành</div>
+              <div class="stat-value" id="completed-orders">0</div>
+              <div class="stat-change positive">
+                ↑ 8.3% <span style="font-weight: 400; color: #64748b;">Tháng này</span>
+              </div>
+            </div>
+            <div class="stat-icon green">✅</div>
+          </div>
+        </div>
+
+        <!-- Filter & Actions -->
+        <div class="content-card">
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                <select class="form-control" id="filter-status" style="width: auto;">
+                  <option value="">Tất cả trạng thái</option>
+                  <option value="Đang xử lý">Đang xử lý</option>
+                  <option value="Đang giao">Đang giao</option>
+                  <option value="Đã giao">Đã giao</option>
+                  <option value="Đã hủy">Đã hủy</option>
+                </select>
+                <select class="form-control" id="filter-date" style="width: auto;">
+                  <option value="">Tất cả thời gian</option>
+                  <option value="today">Hôm nay</option>
+                  <option value="week">Tuần này</option>
+                  <option value="month">Tháng này</option>
+                </select>
+                <div class="header-search" style="margin: 0;">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" class="search-input" placeholder="Tìm kiếm đơn hàng..." id="search-orders">
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-success" onclick="exportOrdersToExcel()" title="Xuất dữ liệu ra Excel">
+                  📥 Excel
+                </button>
+                <button class="btn btn-success" onclick="exportOrdersToPDF()" title="Xuất dữ liệu ra PDF">
+                  📄 PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              🛒 Danh Sách Đơn Hàng (<span id="order-count">0</span>)
+            </h2>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>MÃ ĐH</th>
+                  <th>KHÁCH HÀNG</th>
+                  <th>SẢN PHẨM</th>
+                  <th>NGÀY ĐẶT</th>
+                  <th>TỔNG TIỀN</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>HÀNH ĐỘNG</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table">
+                <!-- Will be filled by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Order Detail Modal -->
+  <div class="modal-overlay" id="order-detail-modal">
+    <div class="modal" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Chi Tiết Đơn Hàng <span id="modal-order-id"></span></h2>
+        <button class="modal-close" onclick="closeModal('order-detail-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">📋 Thông Tin Đơn Hàng</h3>
+            <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Mã đơn:</strong> <span id="detail-order-id"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Ngày đặt:</strong> <span id="detail-order-date"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Trạng thái:</strong> <span id="detail-order-status"></span></p>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">👤 Thông Tin Khách Hàng</h3>
+            <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Tên:</strong> <span id="detail-customer-name"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>Email:</strong> <span id="detail-customer-email"></span></p>
+              <p style="margin: 8px 0; font-size: 14px;"><strong>SĐT:</strong> <span id="detail-customer-phone"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b;">📦 Sản Phẩm</h3>
+        <div id="detail-order-items" style="margin-bottom: 24px;">
+          <!-- Will be filled by JavaScript -->
+        </div>
+
+        <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: #1e293b;">
+            <span>Tổng cộng:</span>
+            <span id="detail-order-total"></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('order-detail-modal')">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Status Modal -->
+  <div class="modal-overlay" id="edit-status-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Cập Nhật Trạng Thái Đơn Hàng</h2>
+        <button class="modal-close" onclick="closeModal('edit-status-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-order-id">
+        <div class="form-group">
+          <label class="form-label">Mã đơn hàng</label>
+          <input type="text" class="form-control" id="edit-order-display-id" disabled>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Trạng thái mới *</label>
+          <select class="form-control" id="edit-order-status">
+            <option value="Đang xử lý">⏳ Đang xử lý</option>
+            <option value="Đang giao">🚚 Đang giao</option>
+            <option value="Đã giao">✅ Đã giao</option>
+            <option value="Đã hủy">❌ Đã hủy</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('edit-status-modal')">Hủy</button>
+        <button class="btn btn-primary" onclick="updateOrderStatus()">💾 Cập Nhật</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../js/admin-main.js"></script>
+  <script src="../js/admin-notifications.js"></script>
+  <script src="../js/admin-orders.js"></script>
+</body>
+</html>
